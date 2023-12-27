@@ -8,7 +8,9 @@ let streamAnswer = fs.createWriteStream(path.join(__dirname, "answer.txt"), {
 	flags: "a"
 });
 const report = (...messages) => {
+	console.log(path.join(__dirname, "answer.txt"));
 	streamAnswer.write(JSON.stringify(messages) + "\n");
+
 	console.log(
 		`[${require(fromHere("../../package.json")).logName} / ${__dirname
 			.split(path.sep)
@@ -16,7 +18,7 @@ const report = (...messages) => {
 		...messages
 	);
 };
-const lib = require("../lib/dayTODO");
+const lib = require("../lib/day1");
 
 function run() {
 	const filePath = path.join(__dirname, "input.txt");
