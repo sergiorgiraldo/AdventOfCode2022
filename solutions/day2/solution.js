@@ -16,7 +16,7 @@ const report = (...messages) => {
 		...messages
 	);
 };
-const lib = require("../lib/dayTODO");
+const lib = require("../lib/day2");
 
  function run() {
 	const filePath = path.join(__dirname, "input.txt");
