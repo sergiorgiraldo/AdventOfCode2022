@@ -1,5 +1,20 @@
 # Changelog
 
+## [4.0.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v3.0.0...v4.0.0) (2023-12-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* day 3 completed
+* day 3 completed
+* day 3 completed
+
+### Features
+
+* day 3 completed ([8a355d3](https://github.com/sergiorgiraldo/AdventOfCode2022/commit/8a355d3402e9c97be10c31243f3527dc821a9d73))
+* day 3 completed ([4b58d36](https://github.com/sergiorgiraldo/AdventOfCode2022/commit/4b58d3658270ff87ae930425c26b8a67c06ab41b))
+* day 3 completed ([7b38668](https://github.com/sergiorgiraldo/AdventOfCode2022/commit/7b38668e63713bfb8d35c6245e50e19ba73dc2eb))
+
 ## [3.0.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v2.1.0...v3.0.0) (2023-12-28)
 
 
