@@ -8,4 +8,4 @@ node solutions/viewer-server.js
 
 gh pr create --fill
 
-gh pr merge
+gh pr merge --auto
