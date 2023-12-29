@@ -46,10 +46,8 @@ https://sergiorgiraldo.github.io/AdventOfCode2022/solutions/
    - https://github.com/marketplace/actions/aoc-badges
 4. Change the year in package.json and set version to 0.0.0
 5. Change the year in the readme
-6. Change year in templates (template/solution.js,viewer.html)
-7. Change year in viewer-server.js
-8. Change ITERATION to 0.0.1
-9. Delete CHANGELOG.md and package-lock.json 
+6. Change ITERATION to 0.0.1
+7. Delete CHANGELOG.md and package-lock.json 
 
 ## Based in 
 
