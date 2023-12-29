@@ -28,6 +28,10 @@ https://sergiorgiraldo.github.io/AdventOfCode2022/solutions/
 
   - `npm run submit 15 2`, part 2 of day 15
 
+- To merge and generate relase, use `./deploy.sh day`
+
+  - `./deploy.sh 7`, day seven completed 
+
 ## Setup
 
 1. Enable github pages: repo settings > pages > deploy from branch main, root
