@@ -5,13 +5,13 @@ function solveForFirstStar(lines) {
 		.map((line) => {
 			const items = line.split("");
 			const half = Math.floor(items.length / 2);
+			
 			const first = items.slice(0, half);
 			const second = items.slice(half);
+			
 			const intersect = helpers.arrrays.intersect(first, second);
-			//a-z: 97-122
-			//A-Z: 65-90
-			const charCode = intersect[0].charCodeAt(0);
-			return charCode > 90 ? charCode - 96 : charCode - 38;
+			
+			return getPriority(intersect[0]);
 		})
 		.reduce((acc, curr) => acc + curr, 0);
 
@@ -25,19 +25,25 @@ function solveForSecondStar(lines) {
 		const first = lines[i].split("");
 		const second = lines[i + 1].split("");
 		const third = lines[i + 2].split("");
+		
 		const intersect = helpers.arrrays.intersect(
 			helpers.arrrays.intersect(first, second),
 			third
 		);
-		//a-z: 97-122
-		//A-Z: 65-90
-		const charCode = intersect[0].charCodeAt(0);
-		priorities.push(charCode > 90 ? charCode - 96 : charCode - 38);
+		
+		priorities.push(getPriority(intersect[0]));
 	}
 
 	const total = priorities.reduce((acc, curr) => acc + curr, 0);
 
 	return total;
+}
+
+function getPriority(item) {
+	//a-z: 97-122, should be 1-26
+	//A-Z: 65-90, should be 27-52
+	const charCode = item.charCodeAt(0);
+	return charCode > 90 ? charCode - 96 : charCode - 38;
 }
 
 module.exports = { solveForFirstStar, solveForSecondStar };
