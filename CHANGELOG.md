@@ -1,5 +1,16 @@
 # Changelog
 
+## [6.0.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v5.0.0...v6.0.0) (2023-12-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* day 15 completed
+
+### Features
+
+* day 15 completed ([9a601ee](https://github.com/sergiorgiraldo/AdventOfCode2022/commit/9a601ee68714b292bbe55d1e20e63e29a5c8701f))
+
 ## [5.0.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v4.0.0...v5.0.0) (2023-12-29)
 
 
