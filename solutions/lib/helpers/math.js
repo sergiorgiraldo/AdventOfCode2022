@@ -26,6 +26,19 @@ const greatestCommonDivisor = (x, y) => {
 	return greatestCommonDivisor(y, x % y);
 };
 
+const greatestCommonDivisorFromArray = (arr) => {
+	const n = arr.lenght; 
+	let result = arr[0]; 
+	for (let i = 1; i < n; i++) { 
+		result = greatestCommonDivisor(arr[i], result); 
+  
+		if (result == 1) { 
+			return 1; 
+		} 
+	} 
+	return result; 
+} 
+
 /**
  * Accepts a numerator and denominator and returns a tuple with a reduced
  * numerator/denominator pair.
@@ -154,6 +167,7 @@ const simplifiedLagrange = (values) => {
 module.exports = {
 	leastCommonMultiple,
 	greatestCommonDivisor,
+	greatestCommonDivisorFromArray,
 	reduceFraction,
 	identity,
 	sum,
