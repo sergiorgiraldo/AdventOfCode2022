@@ -1,0 +1,2 @@
+["Solution 1:",5710," Execution time: 6 ms"]
+["Solution 2:",2259," Execution time: 20 ms"]
