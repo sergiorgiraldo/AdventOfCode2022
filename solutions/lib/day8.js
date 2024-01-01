@@ -82,13 +82,9 @@ function getScore(treeMap, i, j) {
 	//top
 	k = i-1;
 	while (k >= 0){
-
+		fromTop += 1;
 		if (treeMap[k][j] >= height) {
-			fromTop += 1;
 			break;
-		}
-		else{
-			fromTop += 1;
 		}
 		k--;
 	}
@@ -96,12 +92,9 @@ function getScore(treeMap, i, j) {
 	//bottom
 	k = i+1;
 	while(k < treeMap.length){
+		fromBottom += 1;
 		if (treeMap[k][j] >= height) {
-			fromBottom += 1;
 			break;
-		}
-		else{
-			fromBottom += 1;
 		}
 		k++;
 	}
@@ -109,12 +102,9 @@ function getScore(treeMap, i, j) {
 	//left
 	k = j-1;
 	while(k >= 0){
+		fromLeft += 1;
 		if (treeMap[i][k] >= height) {
-			fromLeft += 1;
 			break;
-		}
-		else{
-			fromLeft += 1;
 		}
 		k--;
 	}
@@ -122,12 +112,9 @@ function getScore(treeMap, i, j) {
 	//right
 	k = j+1;
 	while(k < treeMap[i].length){
+		fromRight += 1;
 		if (treeMap[i][k] >= height) {
-			fromRight += 1;
 			break;
-		}
-		else{
-			fromRight += 1;
 		}
 		k++;
 	}
