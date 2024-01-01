@@ -11,11 +11,11 @@ function solveForSecondStar(lines) {
 function doMonkeyBusiness(lines, rounds, relief){
 	const monkeySpecs = generateMonkeySpecs(lines);
 
-	const monkeysSpecsAfterRounds = playRounds(monkeySpecs, rounds, relief);
+	const monkeySpecsAfterRounds = playRounds(monkeySpecs, rounds, relief);
 
-	monkeysSpecsAfterRounds.sort((m1, m2) => m2.itemsInspected - m1.itemsInspected);
+	monkeySpecsAfterRounds.sort((m1, m2) => m2.itemsInspected - m1.itemsInspected);
 		
-	const levelOfMonkeyBusiness = monkeysSpecsAfterRounds[0].itemsInspected * monkeysSpecsAfterRounds[1].itemsInspected;
+	const levelOfMonkeyBusiness = monkeySpecsAfterRounds[0].itemsInspected * monkeySpecsAfterRounds[1].itemsInspected;
 
 	return levelOfMonkeyBusiness;
 }
@@ -27,7 +27,7 @@ function generateMonkeySpecs(lines) {
 		monkeySpecs.push({
 			number: monkeySpecs.length,
 
-			itemWorryLevelList: /: (.*)$/
+			itemLevels: /: (.*)$/
 				.exec(lines[monkeyIndex + 1])[1]
 				.split(", ")
 				.map(Number),
@@ -56,7 +56,7 @@ function generateMonkeySpecs(lines) {
 	return monkeySpecs;
 }
 
-function playRounds(monkeySpecs, rounds, applyRelief = true) {
+function playRounds(monkeySpecs, rounds, applyRelief) {
 	for (let round = 0; round < rounds; ++round) {
 	  monkeySpecs.forEach((spec) => {
 		spec = inspectItems(spec, monkeySpecs, applyRelief);
@@ -69,45 +69,43 @@ function playRounds(monkeySpecs, rounds, applyRelief = true) {
  
 
 function inspectItems(spec, monkeySpecs, applyRelief) {
-	let allDivisorsModulo = monkeySpecs
-		.map((monkey) => monkey.test.isDivisibleBy)
-		.reduce((modulo, divisor) => modulo * divisor, 1);
+	const lcm = helpers.math.leastCommonMultiple(monkeySpecs.map((monkey) => monkey.test.isDivisibleBy));
 
-	spec.itemsInspected += spec.itemWorryLevelList.length;
+	spec.itemsInspected += spec.itemLevels.length;
 
-	spec.itemWorryLevelList = spec.itemWorryLevelList.map(
-		(itemWorryLevel) => {
-			let newItemWorryLevel = evaluateMonkeyOperation(spec.operation, itemWorryLevel);
+	spec.itemLevels = spec.itemLevels.map(
+		(itemLevel) => {
+			let newItemLevel = evaluateMonkeyOperation(spec.operation, itemLevel);
 			return applyRelief
-				? reliefItem(newItemWorryLevel)
-				: newItemWorryLevel % allDivisorsModulo;
+				? reliefitemLevel(newItemLevel)
+				: newItemLevel % lcm;
 		}
 	);
 
 	return spec;
 }
 
-function reliefItem(itemWorryLevel) {
-	return Math.floor(itemWorryLevel / 3);
+function reliefitemLevel(itemLevelWorryLevel) {
+	return Math.floor(itemLevelWorryLevel / 3);
 }
 
 function moveItemsAmongMonkeys(spec, monkeySpecs) {
-	spec.itemWorryLevelList.forEach((itemWorryLevel) => {
-		if (itemWorryLevel % spec.test.isDivisibleBy === 0) {
-			monkeySpecs[spec.test.isTrueMonkey].itemWorryLevelList.push(itemWorryLevel);
+	spec.itemLevels.forEach((itemLevel) => {
+		if (itemLevel % spec.test.isDivisibleBy === 0) {
+			monkeySpecs[spec.test.isTrueMonkey].itemLevels.push(itemLevel);
 		} else {
-			monkeySpecs[spec.test.isFalseMonkey].itemWorryLevelList.push(itemWorryLevel);
+			monkeySpecs[spec.test.isFalseMonkey].itemLevels.push(itemLevel);
 		}
 	});
 
-	//after moves, current monkey does not have any items
-	monkeySpecs[spec.number].itemWorryLevelList = [];
+	//after moves, current monkey does not have any itemLevels
+	monkeySpecs[spec.number].itemLevels = [];
 
 	return monkeySpecs;
 }
 
-function evaluateMonkeyOperation(operation, itemWorryLevel) {
-	return eval(operation.replace(/old/g, itemWorryLevel));
+function evaluateMonkeyOperation(operation, itemLevel) {
+	return eval(operation.replace(/old/g, itemLevel));
 }
 
 module.exports = { solveForFirstStar, solveForSecondStar };

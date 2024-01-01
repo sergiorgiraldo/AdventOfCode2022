@@ -1,0 +1,57 @@
+const lib = require("../solutions/lib/day13");
+
+test("SolveFirstStar", () => {
+	let lines = [];
+	lines.push("[1,1,3,1,1]");
+	lines.push("[1,1,5,1,1]");
+	lines.push("");
+	lines.push("[[1],[2,3,4]]");
+	lines.push("[[1],4]");
+	lines.push("");
+	lines.push("[9]");
+	lines.push("[[8,7,6]]");
+	lines.push("");
+	lines.push("[[4,4],4,4]");
+	lines.push("[[4,4],4,4,4]");
+	lines.push("");
+	lines.push("[7,7,7,7]");
+	lines.push("[7,7,7]");
+	lines.push("");
+	lines.push("[]");
+	lines.push("[3]");
+	lines.push("");
+	lines.push("[[[]]]");
+	lines.push("[[]]");
+	lines.push("");
+	lines.push("[1,[2,[3,[4,[5,6,7]]]],8,9]");
+	lines.push("[1,[2,[3,[4,[5,6,0]]]],8,9]");
+	expect(lib.solveForFirstStar(lines)).toBe(13);
+});
+
+test("SolveSecondStar", () => {
+	let lines = [];
+	lines.push("[1,1,3,1,1]");
+	lines.push("[1,1,5,1,1]");
+	lines.push("");
+	lines.push("[[1],[2,3,4]]");
+	lines.push("[[1],4]");
+	lines.push("");
+	lines.push("[9]");
+	lines.push("[[8,7,6]]");
+	lines.push("");
+	lines.push("[[4,4],4,4]");
+	lines.push("[[4,4],4,4,4]");
+	lines.push("");
+	lines.push("[7,7,7,7]");
+	lines.push("[7,7,7]");
+	lines.push("");
+	lines.push("[]");
+	lines.push("[3]");
+	lines.push("");
+	lines.push("[[[]]]");
+	lines.push("[[]]");
+	lines.push("");
+	lines.push("[1,[2,[3,[4,[5,6,7]]]],8,9]");
+	lines.push("[1,[2,[3,[4,[5,6,0]]]],8,9]");
+	expect(lib.solveForSecondStar(lines)).toBe(140);
+});
