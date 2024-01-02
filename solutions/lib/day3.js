@@ -9,7 +9,7 @@ function solveForFirstStar(lines) {
 			const first = items.slice(0, half);
 			const second = items.slice(half);
 			
-			const intersect = helpers.arrrays.intersect(first, second);
+			const intersect = helpers.arrays.intersect(first, second);
 			
 			return getPriority(intersect[0]);
 		})
@@ -26,8 +26,8 @@ function solveForSecondStar(lines) {
 		const second = lines[i + 1].split("");
 		const third = lines[i + 2].split("");
 		
-		const intersect = helpers.arrrays.intersect(
-			helpers.arrrays.intersect(first, second),
+		const intersect = helpers.arrays.intersect(
+			helpers.arrays.intersect(first, second),
 			third
 		);
 		
