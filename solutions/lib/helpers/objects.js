@@ -1,4 +1,5 @@
 const { hasOwnProperty } = Object.prototype;
+const {findIndex} = require("lodash");
 
 /**
  * Checks if a value (usually an object) has a property.
@@ -14,6 +15,17 @@ const hasProp = (val, prop) => {
 
 	return hasOwnProperty.call(val, prop);
 };
+
+/**
+ * Checks if an object has any of the specified attributes.
+ *
+ * @param {object} obj - The object to check.
+ * @param {object} attributes - The attributes to check for, given as a object
+ * @return {boolean} Returns true if the object has any of the specified attributes, false otherwise.
+ */
+function existsWithAttrs(obj, attributes) {
+	return findIndex(obj, attributes) !== -1;
+  }
 
 /**
  * Shallowly merges an array of objects using a reducer function.
@@ -51,4 +63,4 @@ const mergeReduced = (objs, reducer, initialValue) => {
 
 const mapValues = require("lodash");
 
-module.exports = { hasProp, mergeReduced, mapValues };
+module.exports = { hasProp, mergeReduced, mapValues, existsWithAttrs };
