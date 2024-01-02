@@ -12,7 +12,7 @@ https://sergiorgiraldo.github.io/AdventOfCode2022/solutions/
 
 ![](https://img.shields.io/badge/day%20📅-24-blue)
  
-![](https://img.shields.io/badge/stars%20⭐-28-yellow)
+![](https://img.shields.io/badge/stars%20⭐-30-yellow)
 
 ## Usage
 
