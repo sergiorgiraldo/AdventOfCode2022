@@ -79,14 +79,21 @@ async function copyTemplate() {
 		testPath,
 `
 const lib = require('../solutions/lib/${newFolderName}');
+const helpers = require("../solutions/lib/helpers.js");
 
 test("SolveFirstStar", () => {
+	helpers.which.env = "test";
+	helpers.clearDebug();
+
 	let lines = [];
 
 	expect(lib.solveForFirstStar(lines)).toBe(-1);
 });
 
 test("SolveSecondStar", () => {
+	helpers.which.env = "test";
+	helpers.clearDebug();
+
 	let lines = [];
 	
 	expect(lib.solveForSecondStar(lines)).toBe(-2);

@@ -19,6 +19,7 @@ function sortCalories(lines){
 	let currentCalorieCount = 0;
 	
 	for (let elfCalorie of lines) {
+		
 		if (elfCalorie === "")	{
 			calories.push(currentCalorieCount);
 			currentCalorieCount = 0;

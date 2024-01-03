@@ -2,6 +2,7 @@ const path = require("path");
 const { position } = require("promise-path");
 const fs = require("fs");
 const fromHere = position(__dirname);
+const helpers = require("../lib/helpers.js");
 
 fs.unlinkSync(path.join(__dirname, "answer.txt"));
 let streamAnswer = fs.createWriteStream(path.join(__dirname, "answer.txt"), {
@@ -19,6 +20,8 @@ const report = (...messages) => {
 const lib = require("../lib/dayTODO");
 
  function run() {
+	helpers.which.env = "prod";
+
 	const filePath = path.join(__dirname, "input.txt");
 	const lines = fs.readFileSync(filePath).toString().split("\n").slice(0, -1);
 
