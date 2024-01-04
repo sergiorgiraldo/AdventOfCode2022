@@ -7,7 +7,7 @@ function solveForFirstStar(lines) {
 		let [x, y, z] = line.split(",").map(Number);
 		cubePositions.add(`${x},${y},${z}`);
 	});
-	helpers.dbg(cubePositions);
+	cubePositions.forEach((cube) => {helpers.dbg(cube)});
 	let surfaceArea = [];
 
 	cubePositions.forEach((cube) => {

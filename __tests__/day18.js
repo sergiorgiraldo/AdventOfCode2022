@@ -4,7 +4,6 @@ const helpers = require("../solutions/lib/helpers.js");
 
 test("SolveFirstStar", () => {
 	helpers.which.env = "test";
-	helpers.clearDebug();
 
 	let lines = [];
 	lines.push("2,2,2");
@@ -25,7 +24,6 @@ test("SolveFirstStar", () => {
 
 test("SolveSecondStar", () => {
 	helpers.which.env = "test";
-	helpers.clearDebug();
 
 	let lines = [];
 	lines.push("2,2,2");

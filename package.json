@@ -10,6 +10,9 @@
 		"webserver": "node solutions/viewer-server.js",
 		"test": "jest --detectOpenHandles --forceExit"
 	},
+	"jest": {
+		"globalSetup": "./jest.setup.js"
+	},
 	"author": "Sergio Rodrigues Giraldo",
 	"license": "ISC",
 	"dependencies": {
