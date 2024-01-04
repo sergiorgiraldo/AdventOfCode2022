@@ -32,6 +32,8 @@ function solveForSecondStar(lines) {
 	*/
 
 	lines.forEach(line => {
+		helpers.dbg(line);
+
 		const play = line.split(" ");
 		if (play[1] === "X") {
 			newGame.push(play[0] + " " + MustLose[play[0]]);
@@ -40,6 +42,7 @@ function solveForSecondStar(lines) {
 		} else if (play[1] === "Z") {
 			newGame.push(play[0] + " " + MustWin[play[0]]);
 		}
+		helpers.dbg(newGame);
 	})
 	const score = getScore(newGame);
 

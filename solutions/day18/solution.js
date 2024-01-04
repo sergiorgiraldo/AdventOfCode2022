@@ -3,6 +3,7 @@ const { position } = require("promise-path");
 const fs = require("fs");
 const fromHere = position(__dirname);
 const helpers = require("../lib/helpers.js");
+
 fs.unlinkSync(path.join(__dirname, "answer.txt"));
 let streamAnswer = fs.createWriteStream(path.join(__dirname, "answer.txt"), {
 	flags: "a"
@@ -16,7 +17,7 @@ const report = (...messages) => {
 		...messages
 	);
 };
-const lib = require("../lib/day2");
+const lib = require("../lib/day18");
 
  function run() {
 	helpers.which.env = "prod";
