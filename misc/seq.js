@@ -19,7 +19,7 @@ const findSequence = (arr) => {
 				dp[i + 1][j] = 0;
 			}
 		}
-        console.log("<<<<<<<< " + a + " - " + i + " >>>>>>>>>>>>")
+        console.log("<<<<<<<< item <" + a + "< - index <" + i + " >>>>>>>>>>>>")
         for (let i = 0; i < dp.length; i++) {
             console.log(dp[i].join(" - "));
         }
@@ -52,6 +52,7 @@ const findPattern = (arr) => {
 // const res1 = findSequence(arr1);
 // console.log(findPattern(res1[0]));
 
-let arr2 = [1,3,4,3,4,5];
+let arr2 = [1,6,7,2,2,3,4,3,4,3,4,3,4,3,4,3,4,5];
 const res2 = findSequence(arr2);
+console.log(res2);
 console.log(findPattern(res2[0]));
