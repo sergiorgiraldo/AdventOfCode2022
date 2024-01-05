@@ -83,7 +83,6 @@ const helpers = require("../solutions/lib/helpers.js");
 
 test("SolveFirstStar", () => {
 	helpers.which.env = "test";
-	helpers.clearDebug();
 
 	let lines = [];
 
@@ -92,7 +91,6 @@ test("SolveFirstStar", () => {
 
 test("SolveSecondStar", () => {
 	helpers.which.env = "test";
-	helpers.clearDebug();
 
 	let lines = [];
 	
