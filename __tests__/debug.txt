@@ -1,3 +1,0 @@
-1/5/2024, 1:59:34 PM --- day19.js
-first - qualityLevels 9,24
-second - qualityLevels 56,62
