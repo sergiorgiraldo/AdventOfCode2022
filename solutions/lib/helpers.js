@@ -27,20 +27,22 @@ function clearDebug() {
 	if (which.env !== "test") return;
 
 	if (fs.existsSync(debugFile)) {
-    fs.truncateSync(debugFile);
-	} 
-  else {
-    fs.createFileSync(debugFile, "utf8");
+		fs.truncateSync(debugFile);
+	} else {
+		fs.createFileSync(debugFile, "utf8");
 	}
 }
 
 function dbg() {
 	if (which.env !== "test") return;
 
-  if (_getNumberOfDebugs() == 0){
-    const caller = _getCallerFile().split("/").slice(-1).join("");
-    fs.writeFileSync(debugFile, new Date().toLocaleString() + " --- " + caller + "\n");
-  }
+	if (_getNumberOfDebugs() == 0) {
+		const caller = _getCallerFile().split("/").slice(-1).join("");
+		fs.writeFileSync(
+			debugFile,
+			new Date().toLocaleString() + " --- " + caller + "\n"
+		);
+	}
 
 	fs.writeFileSync(debugFile, Array.from(arguments).join(" ") + "\n", {flag: "a"});
 	console.log(Array.from(arguments).join(" "));
@@ -73,9 +75,9 @@ function _getCallerFile() {
 }
 
 function _getNumberOfDebugs() {
-  var data = fs.readFileSync(debugFile);
-  var res = data.toString().split('\n').length;
-  return (res-1);
+	var data = fs.readFileSync(debugFile);
+	var res = data.toString().split("\n").length;
+	return res - 1;
 }
 
 module.exports = {
