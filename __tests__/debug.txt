@@ -1,123 +1,15 @@
-1/5/2024, 11:12:32 PM --- day21.js
-[
-  [
-    "root",
-    {
-      "type": "operation",
-      "operand1": "pppw",
-      "operator": "+",
-      "operand2": "sjmn"
-    }
-  ],
-  [
-    "dbpl",
-    {
-      "type": "yell",
-      "number": 5
-    }
-  ],
-  [
-    "cczh",
-    {
-      "type": "operation",
-      "operand1": "sllz",
-      "operator": "+",
-      "operand2": "lgvd"
-    }
-  ],
-  [
-    "zczc",
-    {
-      "type": "yell",
-      "number": 2
-    }
-  ],
-  [
-    "ptdq",
-    {
-      "type": "operation",
-      "operand1": "humn",
-      "operator": "-",
-      "operand2": "dvpt"
-    }
-  ],
-  [
-    "dvpt",
-    {
-      "type": "yell",
-      "number": 3
-    }
-  ],
-  [
-    "lfqf",
-    {
-      "type": "yell",
-      "number": 4
-    }
-  ],
-  [
-    "humn",
-    {
-      "type": "yell",
-      "number": 5
-    }
-  ],
-  [
-    "ljgn",
-    {
-      "type": "yell",
-      "number": 2
-    }
-  ],
-  [
-    "sjmn",
-    {
-      "type": "operation",
-      "operand1": "drzm",
-      "operator": "*",
-      "operand2": "dbpl"
-    }
-  ],
-  [
-    "sllz",
-    {
-      "type": "yell",
-      "number": 4
-    }
-  ],
-  [
-    "pppw",
-    {
-      "type": "operation",
-      "operand1": "cczh",
-      "operator": "/",
-      "operand2": "lfqf"
-    }
-  ],
-  [
-    "lgvd",
-    {
-      "type": "operation",
-      "operand1": "ljgn",
-      "operator": "*",
-      "operand2": "ptdq"
-    }
-  ],
-  [
-    "drzm",
-    {
-      "type": "operation",
-      "operand1": "hmdt",
-      "operator": "-",
-      "operand2": "zczc"
-    }
-  ],
-  [
-    "hmdt",
-    {
-      "type": "yell",
-      "number": 32
-    }
-  ]
-]
-target: 150 hummanAffectedOperand: pppw
+1/6/2024, 5:10:09 PM --- day22.js
+12
+ , , , , , , , ,.,.,.,#, 
+ , , , , , , , ,.,#,.,., 
+10,R,5,L,5,R,10,L,4,R,5,L,5
+start  8 - 0
+next  10 - 0
+next  10 - 5
+next  3 - 5
+next  3 - 7
+next  7 - 7
+next  7 - 5
+next  7 - 5
+7 - 5   0
+8 - 4   2
