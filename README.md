@@ -10,7 +10,7 @@ https://sergiorgiraldo.github.io/AdventOfCode2022/solutions/
 
 ## Performance
 
-![](https://img.shields.io/badge/day%20📅-24-blue)
+![](https://img.shields.io/badge/day%20📅-25-blue)
  
 ![](https://img.shields.io/badge/stars%20⭐-50-yellow)
 
