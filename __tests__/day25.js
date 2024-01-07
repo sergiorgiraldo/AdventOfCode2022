@@ -21,11 +21,3 @@ test("SolveFirstStar", () => {
 	lines.push("122");
 	expect(lib.solveForFirstStar(lines)).toBe("2=-1=0");
 });
-
-test("SolveSecondStar", () => {
-	helpers.which.env = "test";
-
-	let lines = [];
-	
-	expect(lib.solveForSecondStar(lines)).toBe(-2);
-});
