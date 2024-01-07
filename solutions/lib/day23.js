@@ -38,7 +38,7 @@ function runSimulationPart1(elves, rounds){
 	const directions = ["N", "S", "W", "E"];
 
 	for (let r = 0; r < rounds; r++) {
-		simulateOneRound(elves, directions);
+		moveElvesAround(elves, directions);
 
 		const rotatedDir = directions.shift();
 		directions.push(rotatedDir);
@@ -50,7 +50,7 @@ function runSimulationPart2(elves){
 
 	let elvesStopped = false;
 	for (let round = 0; !elvesStopped; round++) {
-		elvesStopped = simulateOneRound(elves, directions);
+		elvesStopped = moveElvesAround(elves, directions);
 
 		if (elvesStopped) return round + 1;
 
@@ -59,10 +59,10 @@ function runSimulationPart2(elves){
 	}
 };
 
-function simulateOneRound(elves, directions){
+function moveElvesAround(elves, directions){ //move elves a round :D
 	let nextPos = new Map();
 
-	// Check each elf to see if they will move this round to a new position or staty put
+	// Check each elf to see if they will move this round to a new position or stay put
 	elves.forEach((value) => {
 		// Get current cordinates and coordinates for all surrounding points
 		let coord = value.split(",").map((i) => parseInt(i));
@@ -93,10 +93,10 @@ function simulateOneRound(elves, directions){
 				let dir = directions[d];
 				// Consider North
 				if (dir === "N") {
-					// If this direciton is clear
+					// If this direction is clear
 					if (!hasNW && !hasN && !hasNE) {
 						foundDirection = true;
-						// If a collision was found delete the other elf's move and don't
+						// If a collision was found, delete the other elf's move and don't
 						// add one for this elf. Both elves will not move this round
 						if (nextPos.has(n)) {
 							nextPos.delete(n);
@@ -109,7 +109,7 @@ function simulateOneRound(elves, directions){
 				}
 				// Consider South
 				else if (dir === "S") {
-					// If this direciton is clear
+					// If this direction is clear
 					if (!hasSW && !hasS && !hasSE) {
 						foundDirection = true;
 						// If a collision was found delete the other elf's move and don't
@@ -125,7 +125,7 @@ function simulateOneRound(elves, directions){
 				}
 				// Consider West
 				else if (dir === "W") {
-					// If this direciton is clear
+					// If this direction is clear
 					if (!hasNW && !hasW && !hasSW) {
 						foundDirection = true;
 						// If a collision was found delete the other elf's move and don't
@@ -141,7 +141,7 @@ function simulateOneRound(elves, directions){
 				}
 				// Consider East
 				else if (dir === "E") {
-					// If this direciton is clear
+					// If this direction is clear
 					if (!hasNE && !hasE && !hasSE) {
 						foundDirection = true;
 						// If a collision was found delete the other elf's move and don't
