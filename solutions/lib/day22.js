@@ -172,15 +172,16 @@ function findFacePosition(map, faceNumber, faceSize) {
 function getFaceNumber(x, y, faceSize) {
 	if (x >= faceSize && x < faceSize * 2 && y >= 0 && y < faceSize) return 1;
 	if (x >= faceSize * 2 && x < faceSize * 3 && y >= 0 && y < faceSize * 2) return 2; 
-	if (x >= faceSize && x <= faceSize * 2 && y >= faceSize && y < faceSize * 2) return 3; 
+	if (x >= faceSize && x < faceSize * 2 && y >= faceSize && y < faceSize * 2) return 3; 
 	if (x >= 0 && x < faceSize && y >= faceSize * 2 && y < faceSize * 3) return 4; 
-	if (x >= faceSize && x <= faceSize * 2 && y >= faceSize * 2 && y < faceSize * 3) return 5; 
+	if (x >= faceSize && x < faceSize * 2 && y >= faceSize * 2 && y < faceSize * 3) return 5; 
 	if (x >= 0 && x < faceSize && y >= faceSize * 3 && y < faceSize * 4) return 6;
+	return undefined;
 }
 
 /*
 # PUZZLE INPUT DATA
-#                   6>    6^
+#   Y               6>    6^
 #   0            + - - + - - +
 #                |     |     |
 #              4>|  1  |  2  |5<
@@ -199,9 +200,16 @@ function getFaceNumber(x, y, faceSize) {
 #          |     |
 #   4F     + - - +
 #             2v
-#          0     F     2     3
+#    X     0     F     2     3
 #                      F     F
-# 					   			
+#
+# 50-Cube ranges
+# 1 [50,99],[0,49]
+# 2 [100,149],[0,49]
+# 3 [50,99],[0,49]
+# 4 [0,49],[50,149]
+# 5 [50,99],[50,149]
+# 6 [0,49],[150,199]
 */
 function findWrapPositionInCube(map, position, direction, faceSize) {
 	/* 
@@ -210,23 +218,40 @@ function findWrapPositionInCube(map, position, direction, faceSize) {
 	*/
 
 	const wrapMap = new Map(); // face,direction
-	wrapMap.set("1,3", "6,0");
+	wrapMap.set("1,0", "2,0");
+	wrapMap.set("1,1", "3,1");
 	wrapMap.set("1,2", "4,0");
+	wrapMap.set("1,3", "6,0");
+	
 	wrapMap.set("2,0", "5,2");
 	wrapMap.set("2,1", "3,2");
+	wrapMap.set("2,2", "1,2");
 	wrapMap.set("2,3", "6,3");
+	
 	wrapMap.set("3,0", "2,3");
+	wrapMap.set("3,1", "5,1");
 	wrapMap.set("3,2", "4,1");
-	wrapMap.set("4,3", "3,0");
+	wrapMap.set("3,3", "1,3");
+	
+	wrapMap.set("4,0", "5,0");
+	wrapMap.set("4,1", "6,1");
 	wrapMap.set("4,2", "1,0");
+	wrapMap.set("4,3", "3,0");
+	
 	wrapMap.set("5,0", "2,2");
 	wrapMap.set("5,1", "6,2");
+	wrapMap.set("5,2", "4,2");
+	wrapMap.set("5,3", "3,3");
+	
 	wrapMap.set("6,0", "5,3");
 	wrapMap.set("6,1", "2,1");
 	wrapMap.set("6,2", "1,1");
+	wrapMap.set("6,3", "4,3");	
 
 	let faceNumber = getFaceNumber(position.x, position.y, faceSize);
-	helpers.dbg("face ", faceNumber, " ", position.x, "-", position.y, "-", direction);
+	
+	helpers.dbg("faceSize", faceSize, "face ", faceNumber, " ", position.x, "-", position.y, "-", direction);
+
 	let [newFace, newDirection] = wrapMap.get(`${faceNumber},${direction}`).split(",").map(Number);
 	let newPosition = findFacePosition(map, newFace, faceSize);
 	let relativeX = position.x % faceSize;

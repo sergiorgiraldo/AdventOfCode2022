@@ -1,25 +1,54 @@
-const path = require("path");
-const open = require("open");
-const { make, position, find, read, write, run } = require("promise-path");
-const fromHere = position(__dirname);
+const path_c = require("path");
+const open_c = require("open");
+const { make: make_c, position: position_c, find: find_c, read: read_c, write: write_c, run: run_c } = require("promise-path");
+const fromHere_c = position_c(__dirname);
 const report = (...messages) =>
 	console.log(
-		`[${require(fromHere("./package.json")).logName} / ${__filename
-			.split(path.sep)
+		`[${require(fromHere_c("./package.json")).logName} / ${__filename
+			.split(path_c.sep)
 			.pop()
 			.split(".js")
 			.shift()}]`,
 		...messages
 	);
-const fs = require("fs");
+const fs_c = require("fs");
+const toTitleCase = (str) => {
+	return str.replace(
+	  /\w\S*/g,
+	  function(txt) {
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	  }
+	);
+  }
 
 async function fetchAOCDInput(currentYear, currentDay) {
 	report(
 		"Using AOCD to attempt to download your puzzle input, see: https://github.com/wimglenn/advent-of-code-data"
 	);
 	try {
-		const { stdout, stderr } = await run(
+		const { stdout, stderr } = await run_c(
 			`aocd ${currentDay} ${currentYear}`
+		);
+		if (stderr) {
+			report(`Could not fetch input for ${currentYear} / ${currentDay}`);
+		}
+		if (stdout) {
+			report(`Downloaded using AOCD.`);
+		}
+		return stdout;
+	} catch (ex) {
+		report(`Could not fetch input for ${currentYear} / ${currentDay}`);
+	}
+	return "PASTE YOUR INPUT HERE";
+}
+
+async function fetchAOCDInputTest(currentYear, currentDay) {
+	report(
+		"Using AOCD to attempt to download your puzzle input, see: https://github.com/wimglenn/advent-of-code-data"
+	);
+	try {
+		const { stdout, stderr } = await run_c(
+			`aocd ${currentDay} ${currentYear} --example`
 		);
 		if (stderr) {
 			report(`Could not fetch input for ${currentYear} / ${currentDay}`);
@@ -36,8 +65,8 @@ async function fetchAOCDInput(currentYear, currentDay) {
 
 async function copyTemplate() {
 	const newFolderName = process.argv[2];
-	const templateFolderPath = "solutions/template";
-	const targetFolderPath = fromHere(`solutions/${newFolderName}`);
+	const templateFolderPath = "template";
+	const targetFolderPath = fromHere_c(`solutions/${newFolderName}`);
 
 	if (!newFolderName) {
 		return report(
@@ -47,7 +76,7 @@ async function copyTemplate() {
 		);
 	}
 
-	const existingFiles = await find(`${targetFolderPath}/*`);
+	const existingFiles = await find_c(`${targetFolderPath}/*`);
 	if (existingFiles.length > 0) {
 		report("Existing files found:");
 		console.log(existingFiles.map((n) => "  " + n).join("\n"));
@@ -61,69 +90,48 @@ async function copyTemplate() {
 		templateFolderPath
 	);
 
-	const templateFiles = await find(fromHere(`${templateFolderPath}/*`));
-	await make(fromHere(`solutions/${newFolderName}`));
+	const templateFiles = await find_c(fromHere_c(`${templateFolderPath}/*`));
+	await make_c(fromHere_c(`solutions/${newFolderName}`));
 	await Promise.all(
 		templateFiles.map(async (filepath) => {
-			const contents = await read(filepath);
-			const filename = path.parse(filepath).base;
+			const contents = await read_c(filepath);
+			const filename = path_c.parse(filepath).base;
 			const newFilePath = `solutions/${newFolderName}/${filename}`;
 			report("Creating:", newFilePath);
-			return write(fromHere(newFilePath), contents);
+			return write_c(fromHere_c(newFilePath), contents);
 		})
 	);
 
-	const testPath = fromHere(`__tests__/${newFolderName}.js`);
-	report("Creating:", testPath);
-	write(
-		testPath,
-`
-const lib = require('../solutions/lib/${newFolderName}');
-const helpers = require("../solutions/lib/helpers.js");
-
-test("SolveFirstStar", () => {
-	helpers.which.env = "test";
-
-	let lines = [];
-
-	expect(lib.solveForFirstStar(lines)).toBe(-1);
-});
-
-test("SolveSecondStar", () => {
-	helpers.which.env = "test";
-
-	let lines = [];
-	
-	expect(lib.solveForSecondStar(lines)).toBe(-2);
-});
-`
-	);
-
-	const answerPath = fromHere(`solutions/${newFolderName}/answer.txt`);
+	const answerPath = fromHere_c(`solutions/${newFolderName}/answer.txt`);
 	report("Creating:", answerPath);
-	write(answerPath, "TODO");
+	write_c(answerPath, "TODO");
 
-	const libsPath = fromHere(`solutions/lib/${newFolderName}.js`);
+	const libsPath = fromHere_c(`solutions/lib/${newFolderName}.ts`);
 	report("Creating:", libsPath);
-	write(
+	write_c(
 		libsPath,
 `
-const helpers = require("./helpers");
+class ${toTitleCase(newFolderName)} {
+	public helpers = require("./helpers");
 
-function solveForFirstStar(lines){
-	return 0;
+	public solveForFirstStar(lines: string[]) {
+		return 0;
+	}
+
+	public solveForSecondStar(lines:string[]) {
+		return 0;
+	}
 }
 
-function solveForSecondStar(lines){
-	return 0;
-}
-
-module.exports = { solveForFirstStar, solveForSecondStar };
+export default ${toTitleCase(newFolderName)};
 `
 	);
 
-	const solutionsJsPath = fromHere(`solutions/${newFolderName}/solution.js`);
-	fs.readFile(solutionsJsPath, "utf8", (err, data) => {
+	const solutionsJsPath_ = fromHere_c(`solutions/${newFolderName}/solution.ts.template`);
+	const solutionsJsPath = fromHere_c(`solutions/${newFolderName}/solution.ts`);
+	fs_c.renameSync(solutionsJsPath_, solutionsJsPath);
+
+	fs_c.readFile(solutionsJsPath, "utf8", (err, data) => {
 		if (err) {
 			throw err;
 		}
@@ -133,7 +141,7 @@ module.exports = { solveForFirstStar, solveForSecondStar };
 			Number.parseInt(newFolderName.replace("day", "")).toString()
 		);
 
-		fs.writeFile(solutionsJsPath, updatedData, "utf8", (err) => {
+		fs_c.writeFile(solutionsJsPath, updatedData, "utf8", (err) => {
 			if (err) {
 				throw err;
 			}
@@ -142,8 +150,8 @@ module.exports = { solveForFirstStar, solveForSecondStar };
 		});
 	});
 
-	const viewerPath = fromHere(`solutions/${newFolderName}/viewer.html`);
-	fs.readFile(viewerPath, "utf8", (err, data) => {
+	const viewerPath = fromHere_c(`solutions/${newFolderName}/viewer.html`);
+	fs_c.readFile(viewerPath, "utf8", (err, data) => {
 		if (err) {
 			throw err;
 		}
@@ -153,7 +161,7 @@ module.exports = { solveForFirstStar, solveForSecondStar };
 			Number.parseInt(newFolderName.replace("day", "")).toString()
 		);
 
-		fs.writeFile(viewerPath, updatedData, "utf8", (err) => {
+		fs_c.writeFile(viewerPath, updatedData, "utf8", (err) => {
 			if (err) {
 				throw err;
 			}
@@ -164,7 +172,7 @@ module.exports = { solveForFirstStar, solveForSecondStar };
 
 	report("Attemping to download puzzle input for this date");
 
-	const currentPath = fromHere("/");
+	const currentPath = fromHere_c("/");
 	const currentFolder = currentPath.split("/").reverse()[1];
 	const currentYear = currentFolder.slice(-4);
 	const currentDay = Number.parseInt(newFolderName.replace("day", ""));
@@ -176,18 +184,75 @@ module.exports = { solveForFirstStar, solveForSecondStar };
 	if (currentYear > 0 && currentDay > 0) {
 		report(`Potentially valid year (${currentYear}) / day (${currentDay})`);
 		const aocInputText = await fetchAOCDInput(currentYear, currentDay);
-		await write(
-			fromHere(`solutions/${newFolderName}/input.txt`),
+		await write_c(
+			fromHere_c(`solutions/${newFolderName}/input.txt`),
 			aocInputText,
 			"utf8"
 		);
+
+		const aocInputTestText = await fetchAOCDInputTest(currentYear, currentDay);
+		const lines = aocInputTestText.split("\n");
+		let firstBlock = false, secondBlock = false;
+		let firstBlockLines = "", secondBlockAnswer = "";
+		for (const line of lines) {
+			if (line.startsWith("-------------------------------")) {
+				if (!firstBlock) {
+					firstBlock = true;
+				} else if (!secondBlock) {
+					firstBlock = false;
+					secondBlock = true;
+				}
+				continue;
+			}
+			else{
+				if (firstBlock){
+					firstBlockLines += "lines.push(\"" + line + "\");" + "\n";
+				}
+				else if (secondBlock){
+					secondBlockAnswer = line.split(": ")[1];
+					break;
+				}
+			}
+		}
+
+		const testPath = fromHere_c(`__tests__/${newFolderName}.ts`);
+		report("Creating:", testPath);
+		write_c(
+			testPath,
+	`
+	import { expect, test } from "@jest/globals";
+	import ${toTitleCase(newFolderName)} from "../solutions/lib/${newFolderName}";
+	
+	const helpers = require("../solutions/lib/helpers.ts");
+	
+	test("SolveFirstStar", () => {
+		helpers.which.env = "test";
+		const lib = new ${toTitleCase(newFolderName)}();
+	
+		let lines:string[] = [];
+		${firstBlockLines}
+		expect(lib.solveForFirstStar(lines)).toBe(${secondBlockAnswer});
+	});
+	
+	test("SolveSecondStar", () => {
+		helpers.which.env = "test";
+		const lib = new ${toTitleCase(newFolderName)}();
+	
+		let lines:string[] = [];
+		${firstBlockLines}
+		expect(lib.solveForSecondStar(lines)).toBe(-2);
+	});
+	`
+		);
+
+
 	} else {
 		report(`Invalid year (${currentYear}) / day (${currentDay})`);
 	}
 	report("Opening puzzle of the day");
 	report("Done.");
 	
-	open(`https://adventofcode.com/${currentYear}/day/${currentDay}`);
+	open_c(`https://adventofcode.com/${currentYear}/day/${currentDay}`);
 }
 
 module.exports = copyTemplate();
