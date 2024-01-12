@@ -1,2 +1,14 @@
-1/7/2024, 7:19:49 PM --- day19.js
-first - qualityLevels 9,24
+1/8/2024, 12:04:45 PM --- day22.js
+12
+ , , , , , , , ,.,.,.,#, 
+ , , , , , , , ,.,#,.,., 
+10,R,5,L,5,R,10,L,4,R,5,L,5
+start  8 - 0
+next  10 - 0
+next  10 - 5
+next  3 - 5
+next  3 - 7
+next  7 - 7
+next  7 - 5
+next  7 - 5
+7 - 5   0
