@@ -180,7 +180,7 @@ function getFaceNumber(x, y, faceSize) {
 }
 
 /*
-# PUZZLE INPUT DATA
+# PUZZLE INPUT DATA 200 lines (Y) X 150 columns (X)
 #   Y               6>    6^
 #   0            + - - + - - +
 #                |     |     |
@@ -204,12 +204,13 @@ function getFaceNumber(x, y, faceSize) {
 #                      F     F
 #
 # 50-Cube ranges
-# 1 [50,99],[0,49]
-# 2 [100,149],[0,49]
-# 3 [50,99],[0,49]
-# 4 [0,49],[50,149]
-# 5 [50,99],[50,149]
-# 6 [0,49],[150,199]
+#   [   X  ] ,[    Y  ] 
+# 1 [ 50, 99],[  0, 49]
+# 2 [100,149],[  0, 49]
+# 3 [ 50, 99],[  0, 49]
+# 4 [  0, 49],[ 50,149]
+# 5 [ 50, 99],[ 50,149]
+# 6 [  0, 49],[150,199]
 */
 function findWrapPositionInCube(map, position, direction, faceSize) {
 	/* 
