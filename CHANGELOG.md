@@ -1,5 +1,12 @@
 # Changelog
 
+## [22.2.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v22.1.0...v22.2.0) (2025-11-30)
+
+
+### Features
+
+* retrieve easter-eggs ([2b53f70](https://github.com/sergiorgiraldo/AdventOfCode2022/commit/2b53f7024d5aa9929b3d428b51ee673d40d98215))
+
 ## [22.1.0](https://github.com/sergiorgiraldo/AdventOfCode2022/compare/v22.0.0...v22.1.0) (2025-01-08)
 
 
